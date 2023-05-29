@@ -20,7 +20,7 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <fieldset class="main-button">
-                                        <button type="submit" id="form-submit" class="orange-button" @click="addquiz">Add Quiz</button>
+                                        <button type="submit" id="form-submit" class="orange-button" >Add Quiz</button>
                                         <button type="submit" id="form-submit" class="orange-button" ><router-link to="/teacher/dashboard">Go Back</router-link></button> 
                                     </fieldset>
 
