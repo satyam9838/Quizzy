@@ -14,7 +14,6 @@
 <script>
 import navbar from '../components/navbar.vue';
 import banner from './banner.vue';
-import middle from './middle.vue';
 import services from './services.vue';
 import statistics from './statistics.vue';
 import team from './team.vue';
