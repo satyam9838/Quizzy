@@ -6,7 +6,7 @@
         <div class="col-lg-3 col-md-6">
           <div class="team-member">
             <div class="main-content">
-              <img src="../assests/images/member1.jpg" alt="">
+              <img src="../assests/images/member1.JPG" alt="member1">
               <span class="category">SDE @Optum</span>
               <h4>Shivam Yadav</h4>
               <ul class="social-icons">
@@ -20,7 +20,7 @@
         <div class="col-lg-3 col-md-6">
           <div class="team-member">
             <div class="main-content">
-              <img src="../assests/images/member2.png" alt="">
+              <img src="../assests/images/member2.png" alt="member2">
               <span class="category">SDE @ Monotype</span>
               <h4>Satyam Kumar</h4>
               <ul class="social-icons">
@@ -34,7 +34,7 @@
         <div class="col-lg-3 col-md-6">
           <div class="team-member">
             <div class="main-content">
-              <img src="../assests/images/member3.png" alt="">
+              <img src="../assests/images/member3.png" alt="member3">
               <span class="category">Full Stack Developer</span>
               <h4>Amber Sinha</h4>
               <ul class="social-icons">
@@ -48,7 +48,7 @@
         <div class="col-lg-3 col-md-6">
           <div class="team-member">
             <div class="main-content">
-              <img src="../assests/images/member4.png" alt="">
+              <img src="../assests/images/member4.png" alt="member4">
               <span class="category">Contributor</span>
               <h4>Vivek Kumar</h4>
               <ul class="social-icons">
