@@ -36,7 +36,7 @@
 import { RouterView } from 'vue-router';
 import DashboardNav from '../../../components/DashboardNav.vue';
 import profile from './Profile.vue';
-import Futer from '../../../components/Footer.vue';
+import Futer from '../../../components/footer.vue';
 
 export default {
     name: "Dashboard",

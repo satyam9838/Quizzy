@@ -68,7 +68,7 @@
 <script>
 import axios from 'axios';
 import swal from 'sweetalert';
-import Futer from '../../../components/Footer.vue';
+import Futer from '../../../components/footer.vue';
 import DashboardNav from '../../../components/DashboardNav.vue';
 
 

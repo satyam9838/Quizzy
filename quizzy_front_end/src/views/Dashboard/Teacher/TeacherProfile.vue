@@ -28,7 +28,7 @@
 </template>
     
 <script>
-import Futer from '../../../components/Footer.vue';
+import Futer from '../../../components/footer.vue';
 import DashboardNav from '../../../components/DashboardNav.vue';
 export default {
   name: 'profile',

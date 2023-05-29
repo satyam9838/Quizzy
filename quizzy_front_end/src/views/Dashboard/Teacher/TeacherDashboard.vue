@@ -34,14 +34,7 @@
             </div>
         </div>
     </section>
-
-    <footer>
-    <div class="container">
-      <div class="col-lg-12">
-        <p>Copyright © 2036 Scholar Organization. All rights reserved. &nbsp;&nbsp;&nbsp; Design: <a href="https://templatemo.com" rel="nofollow" target="_blank">TemplateMo</a></p>
-      </div>
-    </div>
-  </footer>
+    <Futer/>
     
 </template>
 <script>
@@ -49,11 +42,11 @@ import { RouterView } from 'vue-router';
 // import Navbar from '../../../components/navbar.vue';
 import DashboardNav from '../../../components/DashboardNav.vue';
 import TeacherProfile from './TeacherProfile.vue';
-
+import Futer from '../../../components/footer.vue';
 
 export default {
     name: "Dashboard",
-    components: { DashboardNav ,TeacherProfile}
+    components: { DashboardNav ,TeacherProfile, Futer}
 }
 </script>
 
