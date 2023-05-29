@@ -9,7 +9,7 @@
       <div class="item">
               <p>“Please tell your friends or collegues about Quizzy website. Anyone can access the website to start his/her learning journey. Thank you for visiting.”</p>
               <div class="author">
-                <img src="assets/images/testimonial-author.jpg" alt="">
+                <img src="../assests/images/testimonial-author.jpg" alt="">
                 <span class="category">Full Stack Developer</span>
                 <h4>Shivam Yadav</h4>
               </div>
@@ -19,7 +19,7 @@
       <div class="item">
               <p>“Please tell your friends or collegues about Quizzy website. Anyone can access the website to start his/her learning journey. Thank you for visiting.”</p>
               <div class="author">
-                <img src="assets/images/testimonial-author.jpg" alt="">
+                <img src="../assests/images/testimonial-author.jpg" alt="">
                 <span class="category">Full Stack Developer</span>
                 <h4>Satyam Kumar</h4>
               </div>
@@ -29,7 +29,7 @@
       <div class="item">
               <p>“Please tell your friends or collegues about Quizzy website. Anyone can access the website to start his/her learning journey. Thank you for visiting.”</p>
               <div class="author">
-                <img src="assets/images/testimonial-author.jpg" alt="">
+                <img src="../assests/images/testimonial-author.jpg" alt="">
                 <span class="category">Full Stack Developer</span>
                 <h4>Amber Sinha</h4>
               </div>
