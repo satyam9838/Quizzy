@@ -1,7 +1,7 @@
 <template>
 
     <div class="container">
-        <img src="../assests/images/Not found.jpg" alt="NotFound.jpg">
+        <img src="../assests/images/Not_found.jpg" alt="NotFound.jpg">
     </div>
 </template>
 
