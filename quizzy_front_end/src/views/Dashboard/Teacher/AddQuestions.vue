@@ -45,7 +45,10 @@
 
                                 <div class="col-lg-12">
                                     <fieldset class="main-btn">
-                                        <button type="submit" id="form-submit" class="orange-button" >Add Question</button>
+                                        <button type="submit" id="form-submit" class="orange-button" :disabled="loading">
+                                            <i class="fa fa-spinner fa-spin" v-if="loading"></i>
+                                                    <span v-else>Add Question</span>
+                                        </button>
                                         <button type="submit" id="form-submit" class="orange-button"><router-link to="/teacher/dashboard">Go Back</router-link></button> 
                                     </fieldset>
                                 </div>
@@ -95,13 +98,18 @@ export default {
     methods: {
         async addquestions() {
             try {
+                this.loading = true;
                 //fetch the token from the localStorage
+                const token = localStorage.getItem('token');
+
+                const confirmed = confirm("Are you sure you want to add question?");
                 if(!this.content && !this.option1 && !this.option2 && !this.option3 && !this.option4 && !this.answer){
+                    this.loading = false;
                     alert("All fields are required");
                     return;
                 }
-                else if(this.content && this.option1 && this.option2 && this.option3 && this.option4 && this.answer){
-                    const token = localStorage.getItem('token');
+
+                else if(this.content && this.option1 && this.option2 && this.option3 && this.option4 && this.answer && confirmed){
                 // console.log(token);
                 //start the loader
                 // this.loading = true;
@@ -115,14 +123,22 @@ export default {
                     title: this.values,
                     }, { headers: { Authorization: "bearer " + token } },);
                     //headers should be written after the data we want to send if we write first then this token will be send as a data
+                    this.loading = false;
                     alert("Questions added");
-                    console.log(details);
+                    // console.log(details);
                     // swal("Questions Added Successfully");
                 }
                 // this.loading = false;
+                this.content = '';
+                this.option1 = '';
+                this.option2 = '';
+                this.option3 = '';
+                this.option4 = '';
+                this.answer = '';
             }
             catch (err) {
                 console.log(err);
+                this.loading = false;
             }
         },
         async gettitle() {

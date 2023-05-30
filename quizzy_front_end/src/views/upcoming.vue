@@ -83,7 +83,7 @@
                 <ul>
                   <li>
                     <span class="category">Statistics</span>
-                    <h4>Analysis of Quiz Submission</h4>
+                    <h4>Student Statistics</h4>
                   </li>
                   <li>
                     <span>Date:</span>

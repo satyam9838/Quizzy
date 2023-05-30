@@ -36,11 +36,14 @@
 
                                         <div class="row1-register">
                                             <div class="SignIn">
-                                                <button id="form-submit" class="orange-button" @click="login">Sign
-                                                    In</button>
+                                                <button id="form-submit" class="orange-button" @click="login"
+                                                    :disabled="loading">
+                                                    <i class="fa fa-spinner fa-spin" v-if="loading"></i>
+                                                    <span v-else>Sign In</span></button>
+
                                             </div>
                                             <div class="col-registered1">
-                                                <button type="submit" id="form-submit2" class="orange-button"><router-link
+                                                <button type="submit" id="form-submit2" class="orange-button" ><router-link
                                                         class="ml-1" style="text-decoration: none;"
                                                         :to="{ path: '/student/signup' }">
                                                         Sign Up</router-link></button>
@@ -86,46 +89,49 @@ export default {
                     minimum: value => value.length >= 4 && value.length <= 16 || ' Password should contains min 4 or max 16',
 
                 }
-            }
+            },
+            loading: false
         };
     },
     methods: {
         async login() {
             try {
+                this.loading = true;
                 if (this.email && this.password) {
-                    if (this.password.length >= 4 && this.password.length <= 12) {
-                        const user = {
-                            email: this.email,
-                            password: this.password,
-                        };
-                        const result = await axios.post(
-                            import.meta.env.VITE_APIURL + "/student/login",
-                            user
-                        );
-                        // this.loading = false;
 
-                        swal("You are logged in", "success");
+                    const user = {
+                        email: this.email,
+                        password: this.password,
+                    };
+                    const result = await axios.post(
+                        import.meta.env.VITE_APIURL + "/student/login",
+                        user
+                    );
+                    this.loading = false;
 
-                        localStorage.setItem('token', result.data.token);
-                        localStorage.setItem('userfirstname', result.data.user.firstname);
-                        localStorage.setItem('userlastname', result.data.user.lastname);
-                        localStorage.setItem('useremail', result.data.user.email);
-                        localStorage.setItem('usercontact', result.data.user.contact);
-                        localStorage.setItem('Isstudent', result.data.user.Isstudent);
-                        const key = await localStorage.getItem('Isstudent')
-                        console.log(result.data.user.Isstudent);
+                    swal("You are logged in", "success");
 
-                        // alert("Success")
-                        console.log(result);
+                    localStorage.setItem('token', result.data.token);
+                    localStorage.setItem('userfirstname', result.data.user.firstname);
+                    localStorage.setItem('userlastname', result.data.user.lastname);
+                    localStorage.setItem('useremail', result.data.user.email);
+                    localStorage.setItem('usercontact', result.data.user.contact);
+                    localStorage.setItem('Isstudent', result.data.user.Isstudent);
+                    const key = await localStorage.getItem('Isstudent')
+                    console.log(result.data.user.Isstudent);
 
-                        localStorage.setItem('token', result.data.token);
-                        this.$router.push({ name: "Studentdashboard" });
-                    }
+                    // alert("Success")
+                    console.log(result);
+
+                    localStorage.setItem('token', result.data.token);
+                    this.$router.push({ name: "Studentdashboard" });
+
 
                 }
             }
             catch (err) {
-                console.log(err)
+                console.log(err);
+                this.loading = false;
             }
         }
     }
@@ -415,4 +421,9 @@ export default {
     color: #fff;
     font-size: 16px;
     font-weight: 400;
-}</style>
+}
+
+
+
+
+</style>

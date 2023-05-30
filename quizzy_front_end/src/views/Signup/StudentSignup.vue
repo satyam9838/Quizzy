@@ -65,11 +65,11 @@
                                             </div>
                                         <div class="row1-register">
                                             <div class="col-registered1">
-                                                <button type="submit" id="form-submit2" class="orange-button"><router-link :to="{path:'/student/login'}">Sign in</router-link></button>
+                                                <button type="submit" id="form-submit2" class="orange-button"><router-link :to="{path:'/student/login'}">Sign In</router-link></button>
                                             </div>
                                             <div class="SignIn">
-                                            <button type="submit" id="form-submit" class="orange-button" @click="signup">Sign
-                                                    Up</button>
+                                            <button type="submit" id="form-submit" class="orange-button" @click="signup" :disabled="loading"><i class="fa fa-spinner fa-spin" v-if="loading"></i>
+                                                    <span v-else>Sign Up</span></button>
                                             </div>
                                         </div>   
                                     </fieldset>
@@ -138,9 +138,9 @@ export default {
   {
       async signup() {
           try {
+            this.loading = true;
               if(this.first_name && this.last_name && this.email && this.password && this.confirmpassword && this.contact){
                   //start the loader
-                  this.loading = true;
                   let result = await axios.post(import.meta.env.VITE_APIURL + "/student", {
                   firstname: this.first_name,
                   lastname: this.last_name,
@@ -150,17 +150,19 @@ export default {
                   Isstudent:this.Isstudent
                   });
                   swal("Successfully Registered", "success");
-                  console.log(result.data);
+                  // console.log(result.data);
+                  this.loading = false;
                   if(!result){
                     console.log("Something went wrong");
                     return;
                   }
                   await this.$router.push({ name: 'Studentlogin' });
               }
-              this.loading = false;
+              
           }
           catch (err) {
               console.log(err)
+              this.loading = false;
           }
       },
       // async getemail(){

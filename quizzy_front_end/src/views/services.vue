@@ -113,4 +113,8 @@ Services Style
   margin-bottom: 25px;
 }
 
+.icon{
+  border: 1px solid rgb(36, 36, 78);
+}
+
 </style>

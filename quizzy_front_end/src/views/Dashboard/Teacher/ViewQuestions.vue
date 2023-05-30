@@ -1,45 +1,42 @@
 <template>
+    <div class="container mt-sm-5 my-1">
+        <div class="question ml-sm-5 pl-sm-5 pt-2">
 
-    
-  
+            <h3 style="text-align:center; color:white ;margin-left:6rem">
+                {{ titleOne }}
+            </h3>
+        </div>
+        <hr />
+        <div class="question ml-sm-5 pl-sm-5 pt-2" v-for="(item, index) in qzarray" :key="item._id">
 
-        <div class="container mt-sm-5 my-1">
-            <div class="question ml-sm-5 pl-sm-5 pt-2">
-
-                <h3 style="text-align:center; color:white ;margin-left:6rem">
-                    {{ titleOne }}
-                </h3>
+            <div class="py-2 h5"><b>{{ index + 1 + " " }}</b><b>{{ item.content }}</b></div>
+            <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
+                <label class="options">{{ item.option1 }}
+                    <input type="radio" name="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="options">{{ item.option2 }}
+                    <input type="radio" name="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="options">{{ item.option3 }}
+                    <input type="radio" name="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="options">{{ item.option4 }}
+                    <input type="radio" name="radio">
+                    <span class="checkmark"></span>
+                </label>
             </div>
-            <hr />
-            <div class="question ml-sm-5 pl-sm-5 pt-2" v-for="(item, index) in qzarray" :key="item._id">
-
-                <div class="py-2 h5"><b>{{ index + 1 + " " }}</b><b>{{ item.content }}</b></div>
-                <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
-                    <label class="options">{{ item.option1 }}
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="options">{{ item.option2 }}
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="options">{{ item.option3 }}
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="options">{{ item.option4 }}
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                    </label>
-                </div>
-                <button id="form-submit" class="mybutton1" @click="updatequestion(item._id, item.title)">Update</button>
-                <hr>
-
-            </div>
-            <button type="submit" id="form-submit" class="mybutton"><router-link to="/teacher/view-quiz">Go
-                    Back</router-link></button>
+            <button id="form-submit" class="mybutton1" @click="updatequestion(item._id, item.title)" :disabled="loading"><i class="fa fa-spinner fa-spin" v-if="loading"></i>
+                                                    <span v-else>Update</span></button>
+            <hr>
 
         </div>
+        <button type="submit" id="form-submit" class="mybutton"><router-link to="/teacher/view-quiz">Go
+                Back</router-link></button>
+
+    </div>
 </template>
 
 <script>
@@ -60,6 +57,7 @@ export default {
             qzarray: [],
             radio: [],
             titleOne: '',
+            loading:false,
         }
     },
     components: {
@@ -88,22 +86,9 @@ export default {
             this.$router.push({ name: 'quiz' })
         },
         async updatequestion(id, titleOne) {
+            this.loading = true;
             this.$router.push({ name: 'UpdateQuestion', params: { id: id } })
             // alert("chal rhi ho?")
-        },
-        async deletequestion(id) {
-            try {
-                const token = await localStorage.getItem('token');
-                console.log(id);
-                const data = await axios.delete(import.meta.env.VITE_APIURL + `/delete-question/${id}`,
-                    { headers: { Authorization: "bearer " + token } });
-                alert("Question Deleted");
-                this.$router.go();
-                // swal("Question deleted");
-            }
-            catch (err) {
-                console.log(err);
-            }
         },
     },
     mounted() {
@@ -272,4 +257,5 @@ body {
     height: 40px;
     /* text-emphasis-color: white; */
 
-}</style>
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-    <DashboardNav/>
+    <DashboardNav />
     <div class="contact-us section" id="contact">
         <div class="container">
             <div class="row">
@@ -10,19 +10,20 @@
                                 <h2>Add Quiz</h2>
                                 <div class="col-lg-12">
                                     <fieldset>
-                                        <input v-model="title" type="text"  placeholder="Title" required>
+                                        <input v-model="title" type="text" placeholder="Title" required>
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-12">
                                     <fieldset>
-                                        <input v-model="description" type="text"  placeholder="Description" required>
+                                        <input v-model="description" type="text" placeholder="Description" required>
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-12">
                                     <fieldset class="butt">
-                                        <button type="submit" id="form-submit" class="orange-button" @click="updatequiz">Update</button>
+                                        <button type="submit" id="form-submit" class="orange-button"
+                                            @click="updatequiz">Update</button>
                                         <button type="submit" id="form-submit" class="orange-button"><router-link
-                                                    to="/teacher/view-quiz">Go Back</router-link></button>
+                                                to="/teacher/view-quiz">Go Back</router-link></button>
                                     </fieldset>
                                 </div>
                             </div>
@@ -32,7 +33,7 @@
             </div>
         </div>
     </div>
-    <Futer/>
+    <Futer />
 </template>
 
 <script>
@@ -51,7 +52,7 @@ export default {
             loading: false
         }
     },
-    components:{DashboardNav,Futer},
+    components: { DashboardNav, Futer },
     methods: {
         async getquiz() {
             try {
@@ -77,16 +78,20 @@ export default {
             try {
                 this.loading = true;
                 const id = this.$route.params.id
-                console.log(id);
+                // console.log(id);
                 const token = localStorage.getItem('token');
 
-                const details = axios.put(import.meta.env.VITE_APIURL + `/update-quiz/${id}`, {
-                    title: this.title,
-                    description: this.description,
-                }, { headers: { Authorization: "bearer " + token } });
-                console.log(details);
-                alert("Quiz is updated");
-                this.$router.push({name:'viewquiz'});
+                const confirmed = confirm("Are you sure you want to update quiz?");
+                if (confirmed) {
+                    const details = axios.put(import.meta.env.VITE_APIURL + `/update-quiz/${id}`, {
+                        title: this.title,
+                        description: this.description,
+                    }, { headers: { Authorization: "bearer " + token } });
+                    console.log(details);
+                    alert("Quiz is updated");
+                    this.$router.push({ name: 'viewquiz' });
+                }
+
 
             }
             catch (err) {
@@ -206,18 +211,18 @@ h2 {
     font-weight: 400;
 }
 
-.butt{
+.butt {
     display: flex;
     justify-content: space-between;
 }
 
 
-.row{
+.row {
     display: flex;
     justify-content: center;
 }
 
-.inner-row h2{
+.inner-row h2 {
     text-align: center;
     margin-bottom: 1rem;
 }

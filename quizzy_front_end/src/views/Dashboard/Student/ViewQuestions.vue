@@ -35,9 +35,9 @@
             </div>
             <div class="btn-sub">
                 <button id="form-submit" class="mybutton" @click="submission">Submit</button>
-            <button type="submit" id="form-submit" class="mybutton" ><router-link to="/student/dashboard" >Go Back</router-link></button> 
+                <button id="form-submit" class="mybutton" @click="goback">Go Back</button>
             </div>
-            
+
 
         </div>
     </div>
@@ -55,6 +55,7 @@ export default {
             qzarray: [],
             radio: [],
             titleOne: '',
+
         }
     },
     methods: {
@@ -90,28 +91,31 @@ export default {
                 //     alert("Your answer is correct you scored 10 out of 20")
 
                 // }
+                const confirmed = confirm("Are you sure you want to submit quiz?");
+                if (confirmed) {
+                    let count = 0;
+                    this.qzarray.forEach((it) => {
+                        // console.log(it.answer);
+                        console.log(it.selectedAns);
+                        if (it.selectedAns === it.answer) {
+                            count++;
+                        }
 
-                let count = 0;
-                this.qzarray.forEach((it) => {
-                    // console.log(it.answer);
-                    console.log(it.selectedAns);
-                    if (it.selectedAns === it.answer) {
-                        count++;
-                    }
+                    })
+                    const len = this.qzarray.length
+                    const percentage = ((count) / len) * 100;
 
-                })
-                const len = this.qzarray.length
-                const percentage = ((count) / len) * 100;
+                    swal(`You scored ${count} out of ${len} and percentage: ${percentage}%`);
+                }
 
-                swal(`You scored ${count} out of ${len} and percentage: ${percentage}%`);
             }
             catch (err) {
                 console.log(err);
             }
         },
-        async gotoquiz() {
+        async goback() {
             try {
-                this.$router.push({ name: 'studentquiz' });
+                this.$router.push({ path: '/student/viewquiz' });
             }
             catch (err) {
                 console.log(err);
@@ -266,14 +270,14 @@ body {
 }
 
 
-.main .container .question h3{
+.main .container .question h3 {
     text-align: center;
-    color:white;
+    color: white;
     /* border:2px solid red; */
-    margin-left:6rem;
+    margin-left: 6rem;
 }
 
-.btn-sub{
+.btn-sub {
     display: flex;
     justify-content: space-between;
 }

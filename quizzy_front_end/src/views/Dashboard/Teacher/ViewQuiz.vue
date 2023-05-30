@@ -1,5 +1,5 @@
 <template>
-    <DashboardNav/>
+    <DashboardNav />
     <section class="section courses" id="courses">
         <div class="container">
             <div class="row">
@@ -7,40 +7,44 @@
                     <div class="section-heading">
                         <!-- <h6>Latest Courses</h6> -->
                         <h2>All Quizzes</h2>
-                        <router-link class="mybutton" :to="{path:'/teacher/dashboard'}">Go Back</router-link>
+                        <router-link class="mybutton" :to="{ path: '/teacher/dashboard' }">Go Back</router-link>
                     </div>
                 </div>
             </div>
-            <div class="row event_box" >
-                <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6 design" v-for="item in values" :key="item._id">
+            <div class="row event_box">
+                <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6 design" v-for="item in values"
+                    :key="item._id">
                     <div class="events_item">
                         <div class="thumb">
                             <a href="#"><img src="../../../assests/images/course-01.jpg" alt=""></a>
-                            
-                            <span class="category" >{{ item.title }}</span>
+
+                            <span class="category">{{ item.title }}</span>
                             <span class="price">
                                 <h6>10+</h6>
                             </span>
                         </div>
                         <div class="down-content">
                             <div class="main-button btn-update">
-                                <button type="button" @click="updatequiz(item._id)">Update</button>
+                                <button type="button" @click="updatequiz(item._id)" :disabled="loading">Update</button>
                             </div>
                             <div class="main-button btn-delete">
-                                <button type="button" @click="deletequiz(item._id,item.title)">Delete</button>
+                                <button type="button" @click="deletequiz(item._id, item.title)">Delete</button>
                             </div>
                             <div class="main-button btn-view">
-                                <button type="button" @click="viewquestions(item.title)">View</button>
+                                <button type="button" @click="viewquestions(item.title)" :disabled="loading">
+                                    <i class="fa fa-spinner fa-spin" v-if="loading"></i>
+                                                    <span v-else>View</span>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
 
             </div>
         </div>
     </section>
-    <Futer/>
+    <Futer />
 </template>
    
 <script>
@@ -50,20 +54,20 @@ import DashboardNav from '../../../components/DashboardNav.vue';
 import Futer from '../../../components/footer.vue';
 export default {
     name: 'quiz',
-    components:{
+    components: {
         DashboardNav,
         Futer
     },
     data() {
         return {
             values: [],
-            loading:false,
+            loading: false,
         }
     },
     methods: {
         async getquiz() {
             const token = await localStorage.getItem('token');
-            const quizdetails = await axios.get( import.meta.env.VITE_APIURL + '/get-quiz', { headers: { Authorization: "bearer " + token } });
+            const quizdetails = await axios.get(import.meta.env.VITE_APIURL + '/get-quiz', { headers: { Authorization: "bearer " + token } });
             const title = quizdetails.data.data.title;
             // const questiondetails = await axios.get(import.meta.env.VITE_APIURL + `/get-question`, 
             // {headers:{ Authorization: "bearer " + token}}, {query:{title}})
@@ -81,32 +85,37 @@ export default {
             // return value;
             // console.log(quizdetails.data.data[0]._id);
             // localStorage.setItem('quizId', quizdetails.data.data[0]._id);
-            
+
         },
-        async deletequiz(id,title) {
-            // this.$router.push({name:'updatequiz',query:{id:id}})
-            // const title = this.$router.query.title;
-            // alert(id);
-            try{
+        async deletequiz(id, title) {
+            try {
                 const token = await localStorage.getItem('token');
-                
-                await axios.delete(import.meta.env.VITE_APIURL + `/delete-quiz/${id}`, { headers: { Authorization: "bearer " + token } })
-                await axios.delete(import.meta.env.VITE_APIURL + `/delete-questions`, { headers: { Authorization: "bearer " + token }, params: { title } })
-                alert("Quiz and their questions deleted");
-                this.$router.go();
-            }
-            catch(err){
+
+                // Display a confirm box to the user
+                const confirmed = confirm("Are you sure you want to delete this quiz and its questions?");
+
+                if (confirmed) {
+                    await axios.delete(import.meta.env.VITE_APIURL + `/delete-quiz/${id}`, { headers: { Authorization: "bearer " + token } });
+                    await axios.delete(import.meta.env.VITE_APIURL + `/delete-questions`, { headers: { Authorization: "bearer " + token }, params: { title } });
+                    alert("Quiz and its questions deleted");
+                    this.$router.go();
+                }
+            } catch (err) {
                 console.log(err);
             }
         },
+
         async viewquestions(titleOne) {
-            // this.loading = true;
-            this.$router.push({ name: 'Viewquestions', query: { title: titleOne } })
+            this.loading = true;
+            this.$router.push({ name: 'Viewquestions', query: { title: titleOne } });
+            this.loading = false;
             // alert(titleOne)
         },
         async updatequiz(id) {
             // alert(id);
-            this.$router.push({ name:`Updatequiz`, params: { id: id } })
+            this.loading = true;
+            this.$router.push({ name: `Updatequiz`, params: { id: id } })
+            this.loading = false;
         }
     },
     mounted() {
@@ -122,19 +131,19 @@ export default {
    --------------------------------------------- 
 */
 
-.mybutton{
-  background-color: #7a6ad8;
-  border: none;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  display: inline-block;
-  margin: 4px 2px;
-  border-radius: 45%;
-  margin-bottom: 1rem;
-  /* text-emphasis-color: white; */
+.mybutton {
+    background-color: #7a6ad8;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    display: inline-block;
+    margin: 4px 2px;
+    border-radius: 45%;
+    margin-bottom: 1rem;
+    /* text-emphasis-color: white; */
 
 }
 
@@ -280,32 +289,33 @@ export default {
     color: #fff;
 } */
 
-.down-content{
+.down-content {
     /* border: 2px solid red; */
     display: flex;
     justify-content: space-evenly;
-    
+
 }
 
-.btn-update button{
+.btn-update button {
     background-color: white;
 }
-.btn-update button:hover{
+
+.btn-update button:hover {
     background-color: rgb(100, 100, 100);
-    color:white;
+    color: white;
 }
 
-.btn-delete button{
+.btn-delete button {
     background-color: white;
 }
-.btn-delete button:hover{
+
+.btn-delete button:hover {
     background-color: rgb(158, 25, 25);
-    color:white;
+    color: white;
 }
 
 
-.btn-view button:hover{
+.btn-view button:hover {
     background-color: #7a6ad8;
-    color:white;
-}
-</style>
+    color: white;
+}</style>

@@ -6,9 +6,9 @@
         <div class="col-12">
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
-            <a href="/" class="logo">
+            <router-link to="/" class="logo">
               <h1>Quizzy</h1>
-            </a>
+            </router-link>
             <!-- ***** Serach Start ***** -->
             <!-- ***** Menu Start ***** -->
 

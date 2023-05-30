@@ -11,8 +11,8 @@
               <h4>Shivam Yadav</h4>
               <ul class="social-icons">
                 <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                <li><a href="https://github.com/Shivam-yadav0206"><i class="fa-brands fa-github"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/shivam-yadav-348a65220/"><i class="fab fa-linkedin"></i></a></li>
               </ul>
             </div>
           </div>
@@ -25,8 +25,8 @@
               <h4>Satyam Kumar</h4>
               <ul class="social-icons">
                 <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                <li><a href="https://github.com/satyamy846"><i class="fa-brands fa-github"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/satyam-kumar-883190158/"><i class="fab fa-linkedin"></i></a></li>
               </ul>
             </div>
           </div>
@@ -39,22 +39,8 @@
               <h4>Amber Sinha</h4>
               <ul class="social-icons">
                 <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="team-member">
-            <div class="main-content">
-              <img src="../assests/images/member4.png" alt="member4">
-              <span class="category">Contributor</span>
-              <h4>Vivek Kumar</h4>
-              <ul class="social-icons">
-                <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                <li><a href="https://github.com/amber1405"><i class="fa-brands fa-github"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/amber-sinha-749238224/"><i class="fab fa-linkedin"></i></a></li>
               </ul>
             </div>
           </div>
@@ -78,6 +64,8 @@ export default{
 Team Style
 --------------------------------------------- 
 */
+
+
 
 .team {
   margin-top: 100px;
@@ -142,6 +130,17 @@ Team Style
 .team-member .main-content ul li a:hover {
   background-color: #7a6ad8;
   color: #fff;
+}
+.row{
+  display: flex;
+  justify-content: space-around;
+}
+.main-content{
+  border: 2px solid rgb(36, 36, 78);
+
+}
+.main-content img{
+  border: 2px solid rgb(36, 36, 78);
 }
 
 

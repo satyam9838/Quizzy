@@ -23,7 +23,8 @@
             </div>
             <div class="down-content">
               <div class="main-button">
-                <button type="button" @click="viewquestions(items.title)">Start</button>
+                <button type="button" @click="viewquestions(items.title)" :disabled="loading"><i class="fa fa-spinner fa-spin" v-if="loading"></i>
+                                                    <span v-else>Start</span></button>
               </div>
             </div>
           </div>
@@ -55,6 +56,7 @@ export default {
     },
     methods: {
         async getquiz() {
+          try{
             const token = await localStorage.getItem('token');
             const quizdetails = await axios.get( import.meta.env.VITE_APIURL + '/get-quiz', { headers: { Authorization: "bearer " + token } });
             const title = quizdetails.data.data.title;
@@ -74,32 +76,21 @@ export default {
             // return value;
             // console.log(quizdetails.data.data[0]._id);
             // localStorage.setItem('quizId', quizdetails.data.data[0]._id);
-            
-        },
-        async deletequiz(title,id) {
-            // this.$router.push({name:'updatequiz',query:{id:id}})
-            // const title = this.$router.query.title;
-            try{
-                const token = await localStorage.getItem('token');
-                
-                await axios.delete(import.meta.env.VITE_APIURL + `/delete-quiz/${id}`, { headers: { Authorization: "bearer " + token } })
-                await axios.delete(import.meta.env.VITE_APIURL + `/delete-questions`, { headers: { Authorization: "bearer " + token }, params: { title } })
-                alert("Quiz and their questions deleted");
-                this.$router.go();
-            }
-            catch(err){
-                console.log(err);
-            }
+          }
+          catch(err){
+            console.log(err);
+          }   
         },
         async viewquestions(titleOne) {
-            // this.loading = true;
-            this.$router.push({ name: 'ViewQuestions', query: { title: titleOne } })
+          const confirmed = confirm("Are you sure you want to start your quiz?");
+          if(confirmed){
+            
+            this.loading = true;
+              this.$router.push({ name: 'ViewQuestions', query: { title: titleOne } })
+              
+            }
             // alert(titleOne)
         },
-        async updatequiz(id) {
-            console.log(id);
-            this.$router.push({ path:`/updatequiz/${id}`, params: { id: id } })
-        }
     },
     mounted() {
         this.getquiz();

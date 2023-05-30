@@ -20,7 +20,10 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <fieldset class="main-button">
-                                        <button type="submit" id="form-submit" class="orange-button" >Add Quiz</button>
+                                        <button type="submit" id="form-submit" class="orange-button" :disabled="loading">
+                                            <i class="fa fa-spinner fa-spin" v-if="loading"></i>
+                                                    <span v-else>Add Quiz</span>
+                                        </button>
                                         <button type="submit" id="form-submit" class="orange-button" ><router-link to="/teacher/dashboard">Go Back</router-link></button> 
                                     </fieldset>
 
@@ -65,15 +68,18 @@ export default {
                 //fetch the token from the localStorage
                 const token = localStorage.getItem('token');
                 
-                // this.loading = true;
-                if(this.title && this.description){
+                this.loading = true;
+                const confirmed = confirm("Are you sure you want to add quiz?");
+                if(this.title && this.description && confirmed){
                     //start the loader
                     const details = await axios.post(import.meta.env.VITE_APIURL + "/addquiz", {
                     title: this.title,
                     description: this.description,
                     }, { headers: { Authorization: "bearer " + token } },);
+                    this.loading = false;
                     //headers should be written after the data we want to send if we write first then this token will be send as a data
                     console.log(details);
+
                     alert("Quiz Successfully Added");
                     
                 }
@@ -83,6 +89,7 @@ export default {
             }
             catch (err) {
                 console.log(err);
+                this.loading = false;
             }
             
         }

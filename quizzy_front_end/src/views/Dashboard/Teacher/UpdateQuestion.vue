@@ -1,68 +1,79 @@
 <template>
-    <DashboardNav/>
+    <DashboardNav />
     <router-link to="/teacher/dashboard/view-quiz"></router-link>
-     <div class="contact-us section" id="contact">
+    <div class="contact-us section" id="contact">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="contact-us-content">
                         <form id="contact-form" action="" method="post" @submit.prevent="updatequestion(title)">
-                            <div class="row" >
+                            <div class="row">
                                 <div class="col-lg-12">
                                     <fieldset>
-                                        <input v-model="content" type="name" name="name" id="name" placeholder="Add Question" required>
+                                        <input v-model="content" type="name" name="name" id="name"
+                                            placeholder="Add Question" required>
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-12">
                                     <fieldset>
-                                        <input v-model="option1" type="text" name="email" id="email" placeholder="Option One" required>
+                                        <input v-model="option1" type="text" name="email" id="email"
+                                            placeholder="Option One" required>
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-12">
                                     <fieldset>
-                                        <input v-model="option2" type="text" name="email" id="email" placeholder="Option two" required>
+                                        <input v-model="option2" type="text" name="email" id="email"
+                                            placeholder="Option two" required>
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-12">
                                     <fieldset>
-                                        <input v-model="option3" type="text" name="email" id="email" placeholder="Option three" required>
+                                        <input v-model="option3" type="text" name="email" id="email"
+                                            placeholder="Option three" required>
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-12">
                                     <fieldset>
-                                        <input v-model="option4" type="text" name="email" id="email" placeholder="Option four" required>
+                                        <input v-model="option4" type="text" name="email" id="email"
+                                            placeholder="Option four" required>
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-12">
                                     <fieldset>
-                                        <input v-model="answer" type="text" name="email" id="email" placeholder="Answer" required>
+                                        <input v-model="answer" type="text" name="email" id="email" placeholder="Answer"
+                                            required>
                                     </fieldset>
                                 </div>
 
-                                <select v-model="values" class="form-select" aria-label="Default select example" >
-                                    <option >{{title }}</option>
+                                <select v-model="values" class="form-select" aria-label="Default select example">
+                                    <option>{{ title }}</option>
                                 </select>
 
 
-                                <div class="col-lg-12">
-                                    <fieldset>
-                                        <button type="submit" id="form-submit" class="orange-button">Update Question</button>
-                                    </fieldset>
-                                </div>
-                                <div class="col-lg-12">
-                                    <fieldset>
-                                     <button type="submit" id="form-submit" class="orange-button"><router-link to="/teacher/dashboard">Go Back</router-link></button> 
-                                    </fieldset>
-                                </div>
+                                
+                                    <div class="col-lg-12 btn-primary">
+
+                                        <button type="submit" id="form-submit" class="orange-button" :disabled="loading">
+                                            <i class="fa fa-spinner fa-spin" v-if="loading"></i>
+                                                    <span v-else>Update Question</span></button>
+                                        <button type="submit" id="form-submit" class="orange-button"><router-link
+                                                to="/teacher/dashboard">Go Back</router-link></button>
+
+
+                                    </div>
+
+
+
+
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
-    <Futer/>
+    <Futer />
 </template>
 
 <script>
@@ -77,17 +88,18 @@ export default {
     data() {
         return {
             questions: [],
-            title:'',
-            content:'',
-            option1:'',
-            option2:'',
-            option3:'',
-            option4:'',
-            answer:'',
+            title: '',
+            content: '',
+            option1: '',
+            option2: '',
+            option3: '',
+            option4: '',
+            answer: '',
+            loading:false,
         }
     },
-    components:{
-        DashboardNav,Futer
+    components: {
+        DashboardNav, Futer
     },
     methods: {
         async getquestions() {
@@ -100,7 +112,7 @@ export default {
                 const questiondetails = await axios.get(import.meta.env.VITE_APIURL + `/get-questionById/${id}`, { headers: { Authorization: "bearer " + token } })
                 console.log(questiondetails.data.data);
                 // this.questions = questiondetails.data.data;
-                this.title =  questiondetails.data.data[0].title;
+                this.title = questiondetails.data.data[0].title;
                 this.content = questiondetails.data.data[0].content;
                 this.option1 = questiondetails.data.data[0].option1;
                 this.option2 = questiondetails.data.data[0].option2;
@@ -118,30 +130,37 @@ export default {
         async updatequestion(titleOne) {
             //update the questions
             try {
+                this.loading = true;
                 const id = this.$route.params.id;
                 // console.log(title);
                 const token = await localStorage.getItem('token');
-                
-                const updated = await axios.put(import.meta.env.VITE_APIURL + `/update-questions/${id}`,{
-                    content: this.content,
-                    option1: this.option1,
-                    option2: this.option2,
-                    option3: this.option3,
-                    option4: this.option4,
-                    answer: this.answer,
-                } ,{ headers: { Authorization: "bearer " + token } })
-                console.log(updated);
-                alert("Question is Updated");
-                this.$router.push({name:'Viewquestions', query:{title:titleOne}})
+
+                const confirmed = confirm("Are you sure you want to update question?");
+                if (confirmed) {
+                    const updated = await axios.put(import.meta.env.VITE_APIURL + `/update-questions/${id}`, {
+                        content: this.content,
+                        option1: this.option1,
+                        option2: this.option2,
+                        option3: this.option3,
+                        option4: this.option4,
+                        answer: this.answer,
+                    }, { headers: { Authorization: "bearer " + token } })
+                    // console.log(updated);
+                    this.loading = false;
+                    alert("Question is Updated");
+                    
+                    this.$router.push({ name: 'Viewquestions', query: { title: titleOne } })
+                }
+
                 // this.$router.go();
             }
             catch (err) {
                 console.log(err);
             }
         },
-        async goback(titleOne){
+        async goback(titleOne) {
             // console.log(titleOne);
-            this.$router.push({name:'viewquizpage',query:{title:titleOne}})
+            this.$router.push({ name: 'viewquizpage', query: { title: titleOne } })
         },
     },
     mounted() {
@@ -155,10 +174,10 @@ export default {
 
 
 <style>
-
-body{
-    color:white;
+body {
+    color: white;
 }
+
 .contact-us {
     margin-top: 80px;
     position: relative;
@@ -250,8 +269,14 @@ body{
 }
 
 
-.row{
+.row {
     display: flex;
     justify-content: center;
+}
+
+.btn-primary {
+    /* border: 2px solid red; */
+    display: flex;
+    justify-content: space-between;
 }
 </style>

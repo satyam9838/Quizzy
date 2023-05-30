@@ -36,8 +36,9 @@
 
                                         <div class="row1-register">
                                             <div class="SignIn">
-                                                <button id="form-submit" class="orange-button" @click="login">Sign
-                                                    In</button>
+                                                <button id="form-submit" class="orange-button" @click="login" :disabled="loading">
+                                                    <i class="fa fa-spinner fa-spin" v-if="loading"></i>
+                                                    <span v-else>Sign In</span></button>
                                             </div>
                                             <div class="col-registered1">
                                                 <button type="submit" id="form-submit2" class="orange-button"><router-link
@@ -86,7 +87,7 @@ export default {
                     required: value => !!value || 'Password is Required.',
                     minimum: value => value.length >= 4 && value.length <= 16 || ' Password should contains min 4 or max 16',
                 }
-            }
+            },
         };
     },
     methods: {
@@ -94,7 +95,7 @@ export default {
             // console.log(this.email, this.password);
             try {
 
-
+                this.loading = true;
                 if (this.email && this.password) {
                     if (this.password.length >= 4 && this.password.length <= 12) {
                         const user = {
@@ -105,12 +106,12 @@ export default {
                         //   alert("User not found")
                         // }
                         //start the loader
-                        this.loading = true;
+                        
                         const result = await axios.post(
                             import.meta.env.VITE_APIURL + "/teacher/login",
                             user
                         );
-                        // this.loading = false;
+                        this.loading = false;
 
                         swal("You are logged in", "success");
                         console.log(result.data.teacher);
