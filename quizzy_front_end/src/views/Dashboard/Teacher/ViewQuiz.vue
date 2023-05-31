@@ -149,7 +149,7 @@ export default {
 
 
 .courses {
-    margin-top: 160px;
+    margin-top: 10rem;
 }
 
 .event_filter {
@@ -318,4 +318,7 @@ export default {
 .btn-view button:hover {
     background-color: #7a6ad8;
     color: white;
-}</style>
+}
+
+
+</style>

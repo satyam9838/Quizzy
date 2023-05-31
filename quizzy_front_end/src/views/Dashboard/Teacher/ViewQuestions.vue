@@ -28,8 +28,12 @@
                     <span class="checkmark"></span>
                 </label>
             </div>
-            <button id="form-submit" class="mybutton1" @click="updatequestion(item._id, item.title)" :disabled="loading"><i class="fa fa-spinner fa-spin" v-if="loading"></i>
+            <div class="down-content">
+                <button id="form-submit" class="mybutton1" @click="updatequestion(item._id, item.title)" :disabled="loading"><i class="fa fa-spinner fa-spin" v-if="loading"></i>
                                                     <span v-else>Update</span></button>
+            <button class="delete-btn mybutton1" @click="deletequestion(item._id)">Delete</button>
+            </div>
+                                                    
             <hr>
 
         </div>
@@ -90,6 +94,25 @@ export default {
             this.$router.push({ name: 'UpdateQuestion', params: { id: id } })
             // alert("chal rhi ho?")
         },
+        async deletequestion(id){
+            try{
+                const confirmed =  confirm("Are you sure you want to delete this question?");
+                const token = await localStorage.getItem('token');
+                // console.log(id);
+                if(confirmed){
+                    const data = await axios.delete(import.meta.env.VITE_APIURL + `/delete-question/${id}`,
+                {headers:{Authorization: "bearer " + token}});
+                alert("Question Deleted");
+                this.$router.go();
+                // swal("Question deleted");
+                }
+                
+                
+            }
+            catch(err){
+                console.log(err);
+            }
+        },
     },
     mounted() {
         this.getquestions()
@@ -112,23 +135,7 @@ body {
     background-color: #ddd;
 }
 
-.mybutton1 {
-    background-color: white;
-    border: none;
-    color: #7a6ad8;
-    /* padding: 20px; */
-    text-align: center;
-    text-decoration: none;
-    font-size: 15px;
-    display: inline-block;
-    margin: px 20px;
-    border-radius: 10%;
-    margin-bottom: .3rem;
-    height: 45px;
-    width: 90px;
-    /* text-emphasis-color: white; */
 
-}
 
 .container {
     background-color: #7a6ad8;
@@ -228,12 +235,12 @@ body {
     color: #fff;
 }
 
-@media(max-width:576px) {
+/* @media(max-width:576px) {
     .question {
         width: 100%;
         word-spacing: 2px;
     }
-}
+} */
 
 .orange-button {
     background-color: #5d5a5a;
@@ -257,5 +264,34 @@ body {
     height: 40px;
     /* text-emphasis-color: white; */
 
+}
+
+.mybutton1 {
+    background-color: white;
+    border: none;
+    color: #7a6ad8;
+    /* padding: 20px; */
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    display: inline-block;
+    margin: px 20px;
+    border-radius: 10%;
+    margin-bottom: .3rem;
+    height: 45px;
+    width: 90px;
+    /* text-emphasis-color: white; */
+
+}
+
+.down-content{
+    display: flex;
+    justify-content: space-between;
+}
+
+.down-content .delete-btn:hover{
+
+    background-color: rgb(158, 25, 25);
+    color: white;
 }
 </style>

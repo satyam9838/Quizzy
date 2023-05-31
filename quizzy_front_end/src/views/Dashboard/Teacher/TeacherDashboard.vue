@@ -38,7 +38,7 @@
     
 </template>
 <script>
-import { RouterView } from 'vue-router';
+// import { RouterView } from 'vue-router';
 // import Navbar from '../../../components/navbar.vue';
 import DashboardNav from '../../../components/DashboardNav.vue';
 import TeacherProfile from './TeacherProfile.vue';
