@@ -38,7 +38,8 @@
                                     </fieldset>
                                 </div>
 
-                                <select v-model="values" class="form-select" aria-label="Default select example" >
+                                <select v-model="values" class="form-select" aria-label="Default select example"  >
+                                    <option value="" disabled selected hidden>Select Title</option>
                                     <option v-for="title in fetchtitle" :key="title._id">{{ title.title }}</option>
                                 </select>
 

@@ -20,7 +20,7 @@
 
                             <span class="category">{{ item.title }}</span>
                             <span class="price">
-                                <h6>10+</h6>
+                                <h6>Quiz</h6>
                             </span>
                         </div>
                         <div class="down-content">
@@ -124,13 +124,20 @@ export default {
 }
 </script>
    
-<style>
+<style scoped>
 /* 
    ---------------------------------------------
    Courses Style
    --------------------------------------------- 
 */
 
+/* .container{
+    border: 2px solid red;
+}
+
+.row{
+    border: 2px solid red;
+} */
 .mybutton {
     background-color: #7a6ad8;
     border: none;

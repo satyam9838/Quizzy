@@ -2,7 +2,6 @@ import { questionmodel } from '../../models/dashboard/Questions.js';
 import {quizmodel} from '../../models/dashboard/quiz.js';
 import CustomError from '../../utils/errorHandler.js';
 
-
 export const quizController = {
     //creating the quiz
     async addQuiz(req,res,next){

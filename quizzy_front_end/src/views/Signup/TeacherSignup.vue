@@ -1,5 +1,5 @@
 <template>
-    <navbar/>
+    <LoginNav/>
     <div class="contact-us section" id="contact">
         <div class="container">
             <div class="row">
@@ -86,12 +86,12 @@
 <script>
 import axios from 'axios';
 import swal from 'sweetalert';
-import navbar from '../../components/navbar.vue';
+import LoginNav from '../../components/LoginNav.vue';
 import Futer from '../../components/footer.vue';
 export default {
     name: 'TeacherSignup',
     components:{
-    navbar,Futer
+    LoginNav,Futer
   },
 
     data(){
@@ -138,7 +138,7 @@ export default {
                 this.loading = true;
                 if(this.first_name && this.last_name && this.email && this.password && this.confirmpassword && this.contact){
                     //start the loader
-                    let result = await axios.post(import.meta.env.VITE_APIURL + "/teacher", {
+                    let result = await axios.post(import.meta.env.VITE_APIURL + "/teacher", {                    
                     firstname: this.first_name,
                     lastname: this.last_name,
                     email: this.email,

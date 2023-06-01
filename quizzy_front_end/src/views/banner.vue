@@ -60,12 +60,23 @@
 
 
 <script>
-export default{
-  name:'banner'
+export default {
+  name: 'banner',
+  methods: {
+    startCarouselAutoplay() {
+      // Start the carousel autoplay
+      const carousel = new bootstrap.Carousel(document.getElementById('carouselExampleCaptions'), {
+        interval: 3000, // Adjust the interval time (in milliseconds) as needed
+        pause: false, // Set to true if you want to pause on hover
+      });
+    }
+  },
+  mounted(){
+    this.startCarouselAutoplay();
+  }
 }
 
 </script>
-
 
 <style>
 

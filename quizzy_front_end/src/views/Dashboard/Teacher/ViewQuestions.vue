@@ -1,4 +1,6 @@
-<template>
+<!-- <template>
+    <DashboardNav/>
+    <section>
     <div class="container mt-sm-5 my-1">
         <div class="question ml-sm-5 pl-sm-5 pt-2">
 
@@ -41,8 +43,61 @@
                 Back</router-link></button>
 
     </div>
-</template>
+</section>
+    <Futer/>
+</template> -->
 
+
+<template>
+    <DashboardNav />
+    <section>
+        <div class="content-container">
+
+
+            <div class="container mt-sm-5 my-1">
+                <div class="question ml-sm-5 pl-sm-5 pt-2">
+                    <h3 style="text-align:center; color:white; margin-left:6rem">{{ titleOne }}</h3>
+                </div>
+                <hr />
+                <div class="question " v-for="(item, index) in qzarray" :key="item._id">
+                    <div class="py-2 h5">
+                        <b>{{ index + 1 + " " }}</b><b>{{ item.content }}</b>
+                    </div>
+                    <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
+                        <label class="options">{{ item.option1 }}
+                            <input type="radio" name="radio">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="options">{{ item.option2 }}
+                            <input type="radio" name="radio">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="options">{{ item.option3 }}
+                            <input type="radio" name="radio">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="options">{{ item.option4 }}
+                            <input type="radio" name="radio">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="down-content">
+                        <button class="mybutton1" @click="updatequestion(item._id, item.title)" :disabled="loading">
+                            <i class="fa fa-spinner fa-spin" v-if="loading"></i>
+                            <span v-else>Update</span>
+                        </button>
+                        <button class="delete-btn mybutton1" @click="deletequestion(item._id)">Delete</button>
+                    </div>
+                    <hr>
+                </div>
+                <button type="submit" class="mybutton">
+                    <router-link to="/teacher/view-quiz">Go Back</router-link>
+                </button>
+            </div>
+        </div>
+    </section>
+    <Futer />
+</template>
 <script>
 import axios from 'axios';
 import swal from 'sweetalert';
@@ -51,17 +106,13 @@ import Futer from '../../../components/footer.vue';
 import DashboardNav from '../../../components/DashboardNav.vue';
 export default {
     name: 'ViewQuestions',
-    // components: {
-    //     navbar,
-    //     Studentdashboard
-    // },
     data() {
         return {
             details: null,
             qzarray: [],
             radio: [],
             titleOne: '',
-            loading:false,
+            loading: false,
         }
     },
     components: {
@@ -94,22 +145,22 @@ export default {
             this.$router.push({ name: 'UpdateQuestion', params: { id: id } })
             // alert("chal rhi ho?")
         },
-        async deletequestion(id){
-            try{
-                const confirmed =  confirm("Are you sure you want to delete this question?");
+        async deletequestion(id) {
+            try {
+                const confirmed = confirm("Are you sure you want to delete this question?");
                 const token = await localStorage.getItem('token');
                 // console.log(id);
-                if(confirmed){
+                if (confirmed) {
                     const data = await axios.delete(import.meta.env.VITE_APIURL + `/delete-question/${id}`,
-                {headers:{Authorization: "bearer " + token}});
-                alert("Question Deleted");
-                this.$router.go();
-                // swal("Question deleted");
+                        { headers: { Authorization: "bearer " + token } });
+                    alert("Question Deleted");
+                    this.$router.go();
+                    // swal("Question deleted");
                 }
-                
-                
+
+
             }
-            catch(err){
+            catch (err) {
                 console.log(err);
             }
         },
@@ -120,7 +171,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 
@@ -135,7 +186,12 @@ body {
     background-color: #ddd;
 }
 
-
+.content-container {
+  margin-top: 4rem;
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: center;
+}
 
 .container {
     background-color: #7a6ad8;
@@ -262,7 +318,9 @@ body {
     border-radius: 50%;
     margin-bottom: 1rem;
     height: 40px;
-    /* text-emphasis-color: white; */
+    text-emphasis-color: white;
+
+    margin-top: 1rem;
 
 }
 
@@ -284,12 +342,12 @@ body {
 
 }
 
-.down-content{
+.down-content {
     display: flex;
     justify-content: space-between;
 }
 
-.down-content .delete-btn:hover{
+.down-content .delete-btn:hover {
 
     background-color: rgb(158, 25, 25);
     color: white;

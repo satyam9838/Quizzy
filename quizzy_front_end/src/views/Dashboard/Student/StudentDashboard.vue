@@ -18,7 +18,7 @@
                    <router-link to="/student/profile">Profile</router-link> 
                 </li>
                 <li>
-                  <router-link to="/student/viewquiz">View Quiz</router-link> 
+                  <router-link to="/student/viewquiz" >View Quiz</router-link> 
                 </li>
             </ul>
             

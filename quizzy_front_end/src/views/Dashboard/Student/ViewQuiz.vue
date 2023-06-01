@@ -19,7 +19,7 @@
             <div class="thumb">
               <a href="#"><img src="../../../assests/images/course-01.jpg" alt=""></a>
               <span class="category">{{ items.title }}</span>
-              <span class="price"><h6>10+</h6></span>
+              <span class="price"><h6>Quiz</h6></span>
             </div>
             <div class="down-content">
               <div class="main-button">
@@ -52,6 +52,7 @@ export default {
         return {
             values: [],
             loading:false,
+            qzarray:[]
         }
     },
     methods: {
@@ -81,6 +82,7 @@ export default {
             console.log(err);
           }   
         },
+        
         async viewquestions(titleOne) {
           const confirmed = confirm("Are you sure you want to start your quiz?");
           if(confirmed){
@@ -94,6 +96,7 @@ export default {
     },
     mounted() {
         this.getquiz();
+        // this.getquestions();
     }
 }
 </script>

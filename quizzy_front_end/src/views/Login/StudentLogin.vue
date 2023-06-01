@@ -1,5 +1,5 @@
 <template>
-    <navbar />
+    <LoginNav/>
     <div class="contact-us section" id="contact">
         <div class="container">
             <div class="row">
@@ -66,12 +66,12 @@
 <script>
 import axios from 'axios';
 import swal from 'sweetalert';
-import navbar from '../../components/navbar.vue';
+import LoginNav from '../../components/LoginNav.vue';
 import Futer from '../../components/footer.vue';
 export default {
     name: 'StudentLogin',
     components: {
-        navbar, Futer
+       LoginNav,Futer
     },
 
     data() {

@@ -1,4 +1,6 @@
 <template>
+    <DashboardNav/>
+    <section>
     <div class="main">
 
 
@@ -34,21 +36,28 @@
                 <hr>
             </div>
             <div class="btn-sub">
-                <button id="form-submit" class="mybutton" @click="submission">Submit</button>
-                <button id="form-submit" class="mybutton" @click="goback">Go Back</button>
+                <button  class="mybutton" @click="submission">Submit</button>
+                <button  class="mybutton" @click="goback">Go Back</button>
+
             </div>
 
 
         </div>
     </div>
+</section>
+    <Futer/>
 </template>
 
 <script>
 import axios from 'axios';
 import swal from 'sweetalert';
+import DashboardNav from '../../../components/DashboardNav.vue';
+import Futer from '../../../components/footer.vue';
 export default {
     name: 'questions',
-
+    components:{
+        Futer,DashboardNav
+    },
     data() {
         return {
             details: null,
@@ -91,6 +100,7 @@ export default {
                 //     alert("Your answer is correct you scored 10 out of 20")
 
                 // }
+                
                 const confirmed = confirm("Are you sure you want to submit quiz?");
                 if (confirmed) {
                     let count = 0;
@@ -129,7 +139,10 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+
+
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 * {
@@ -142,6 +155,16 @@ body {
     background-color: #ddd;
 }
 
+.main{
+    /* border: 2px solid red; */
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* .container{
+    border: 2px solid black;
+} */
 .mybutton {
     background-color: white;
     border: none;
@@ -156,9 +179,12 @@ body {
     border-radius: 50%;
     margin-bottom: 1rem;
     height: 40px;
-    /* text-emphasis-color: white; */
+    text-emphasis-color: white;
+    margin-top: 2rem;
 
 }
+
+
 
 .container {
     background-color: #7a6ad8;

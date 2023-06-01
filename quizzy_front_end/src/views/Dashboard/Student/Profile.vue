@@ -7,8 +7,8 @@
           <div class="team-member">
             <div class="main-content">
               <img src="../../../assests/images/student.jpg" alt="">
-              <span class="category">satyam@gmail.com</span>
-              <h4>Satyam Yadav</h4>
+              <span class="category">{{ email }}</span>
+              <h4>{{ firstname + " " }}{{ lastname }}</h4>
               <ul class="social-icons">
                 <li><a href="#"><i class="fab fa-facebook"></i></a></li>
                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -30,10 +30,37 @@
 import DashboardNav from '../../../components/DashboardNav.vue';
 import Futer from '../../../components/footer.vue';
 export default {
-  name: "profile",
-  components: { DashboardNav, Futer }
+  name: 'profile',
+  data() {
+    return {
+      firstname: '',
+      lastname: '',
+      email: '',
+      contact: ''
+    }
+  },
+  components: { DashboardNav, Futer },
+  methods: {
+    async getusers() {
+      try {
+        this.firstname = localStorage.getItem('userfirstname');
+        this.lastname = localStorage.getItem('userlastname');
+        this.email = localStorage.getItem('useremail');
+        this.contact = localStorage.getItem('usercontact');
+        //without using await you will get to see the promise data is returning
+        // const teacherdetails = await axios.get("http://localhost:5000/getTeacherdetails",{headers:{Authorization:"bearer " + token}});
+        // this.values = user;
+        // console.log(user);
+      }
+      catch (err) {
+        console.log(err);
+      }
+    }
+  },
+  mounted() {
+    this.getusers();
+  }
 }
-
 </script>
 
 

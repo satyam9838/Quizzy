@@ -4,18 +4,7 @@
       <div class="userTestimonail">
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="10000">
-              <div class="item">
-                <p>“Please tell your friends or collegues about Quizzy website. Anyone can access the website to start
-                  his/her learning journey. Thank you for visiting.”</p>
-                <div class="author">
-                  <img src="../assests/images/member1.png" alt="member1.png">
-                  <span class="category">Full Stack Developer</span>
-                  <h4>Shivam Yadav</h4>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item" data-bs-interval="2000">
+            <div class="carousel-item active" >
               <div class="item">
                 <p>“Please tell your friends or collegues about Quizzy website. Anyone can access the website to start
                   his/her learning journey. Thank you for visiting.”</p>
@@ -23,6 +12,17 @@
                   <img src="../assests/images/member2.png" alt="member2.png">
                   <span class="category">Full Stack Developer</span>
                   <h4>Satyam Kumar</h4>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item" >
+              <div class="item">
+                <p>“Please tell your friends or collegues about Quizzy website. Anyone can access the website to start
+                  his/her learning journey. Thank you for visiting.”</p>
+                <div class="author">
+                  <img src="../assests/images/member1.png" alt="member1.png">
+                  <span class="category">Full Stack Developer</span>
+                  <h4>Shivam Yadav</h4>
                 </div>
               </div>
             </div>
@@ -67,7 +67,13 @@
 
 <script>
 export default {
-  name: 'testimonial'
+  name: 'testimonial',
+  mounted() {
+    // Initialize the carousel and set autoplay interval
+    const carousel = new bootstrap.Carousel(document.getElementById('carouselExampleInterval'), {
+      interval: 2000 // Change the autoplay interval (in milliseconds) as per your requirement
+    });
+  }
 }
 </script>
 
