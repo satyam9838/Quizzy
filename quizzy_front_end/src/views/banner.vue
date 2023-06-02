@@ -78,7 +78,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 
 
 /* 
@@ -236,5 +236,35 @@ Banner Style
 .main-banner .owl-nav .owl-next i:hover {
   opacity: 1;
   background-color: rgba(255, 255, 255, 0.5);
+}
+
+
+@media (max-width: 767px) {
+  .main-banner{
+    /* border: 2px solid black; */
+    display: flex;
+    justify-content: center;
+  }
+  .container-banner {
+    width: 100%;
+    /* border: 2px solid red; */
+    max-width: 100%;
+  border-radius: 50px;
+  }
+
+  .main-banner .item {
+    width: 90%;
+    padding: 50px 50px;
+  }
+
+  .main-banner .item h2 {
+    font-size: 32px;
+    line-height: 50px;
+    width: 100%;
+  }
+
+  .main-banner .item p {
+    width: 100%;
+  }
 }
 </style>

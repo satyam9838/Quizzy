@@ -1,3 +1,5 @@
+
+
 <template>
   <!-- ***** Header Area Start ***** -->
   <header class="header-area header-sticky background-header">
@@ -9,17 +11,7 @@
             <a href="/" class="logo">
               <h1>Quizzy</h1>
             </a>
-            <!-- ***** Logo End ***** -->
-            <!-- ***** Serach Start ***** -->
-            <!-- <div class="search-input">
-                      <form id="search" action="#">
-                        <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
-                        <i class="fa fa-search"></i>
-                      </form>
-                    </div> -->
-            <!-- ***** Serach Start ***** -->
-            <!-- ***** Menu Start ***** -->
-            <ul class="nav">
+            <ul class="nav" :class="{ 'visible': isMenuOpen }">
               <li class="scroll-to-section"><router-link to="/" class="active">Home</router-link></li>
               <li class="scroll-to-section"><a href="#services">Services</a></li>
               <li class="scroll-to-section"><a href="#team">Teams</a></li>
@@ -29,7 +21,7 @@
               <li class="scroll-to-section"><router-link to="/teacher/login">Teacher</router-link></li>
             </ul>
 
-            <a class='menu-trigger'>
+            <a class='menu-trigger' @click="toggleMenu">
               <span>Menu</span>
             </a>
             <!-- ***** Menu End ***** -->
@@ -37,8 +29,6 @@
         </div>
       </div>
     </div>
-
-
   </header>
   <!-- ***** Header Area End ***** -->
 </template>
@@ -46,10 +36,23 @@
 <script>
 export default {
   name: 'Navbar',
+  data() {
+    return {
+      isMenuOpen: false
+    };
+  },
+  methods: {
+    toggleMenu() {
+      // alert("hello")
+      this.isMenuOpen = !this.isMenuOpen;
+      console.log(this.isMenuOpen);
+    },
+
+  },
 }
 </script>
 
-<style>
+<style scoped>
 /* 
 ---------------------------------------------
 Header Style

@@ -12,11 +12,11 @@
             <!-- ***** Serach Start ***** -->
             <!-- ***** Menu Start ***** -->
 
-            <ul class="nav">
+            <ul class="nav" :class="{'visible':isMenuOpen}">
               <li  class="scroll-to-section email-list" >
-                <button class="btn" v-if="Isstudent">{{ studentemail }}</button>
+                <span class="btn" v-if="Isstudent">{{ studentemail }}</span>
                 <!-- <li class="scroll-to-section"><a @click="logout">Logout</a></li> -->
-                <button class="btn" v-else >{{ teacheremail }}</button>
+                <span class="btn" v-else >{{ teacheremail }}</span>
                 
              
               </li>
@@ -25,7 +25,7 @@
                 <button @click="logout" type="button"  class="btn" >Logout</button>
               </li>
             </ul>
-            <a class='menu-trigger'>
+            <a class='menu-trigger' @click="toggleMenu">
               <span>Menu</span>
             </a>
             <!-- ***** Menu End ***** -->
@@ -49,9 +49,15 @@ export default {
       studentemail:'',
       Isteacher:'',
       Isstudent:'',
+      isMenuOpen: false
     }
   },
   methods: {
+    toggleMenu() {
+      // alert("hello")
+      this.isMenuOpen = !this.isMenuOpen;
+      console.log(this.isMenuOpen);
+    },
     async logout() {
       try {
         window.localStorage.clear();
@@ -228,6 +234,7 @@ Header Style
   transition: all 0.4s ease 0s;
   border: transparent;
   letter-spacing: .25px;
+  
 }
 
 .header-area .main-nav .nav li a {

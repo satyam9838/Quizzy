@@ -1,7 +1,7 @@
 <template>
     <!-- ***** Header Area Start ***** -->
     <header class="header-area header-sticky background-header">
-      <div class="container2">
+      <div class="container">
         <div class="row">
           <div class="col-12">
             <nav class="main-nav">
@@ -19,13 +19,13 @@
                       </div> -->
               <!-- ***** Serach Start ***** -->
               <!-- ***** Menu Start ***** -->
-              <ul class="nav">
+              <ul class="nav" :class="{'visible':isMenuOpen}">
                 <li class="scroll-to-section"><router-link to="/" class="active">Home</router-link></li>
                 <li class="scroll-to-section"><router-link to="/student/login">Student</router-link></li>
                 <li class="scroll-to-section"><router-link to="/teacher/login">Teacher</router-link></li>
               </ul>
   
-              <a class='menu-trigger'>
+              <a class='menu-trigger' @click="toggleMenu">
                 <span>Menu</span>
               </a>
               <!-- ***** Menu End ***** -->
@@ -42,6 +42,19 @@
   <script>
   export default {
     name: 'LoginNav',
+    data() {
+    return {
+      isMenuOpen: false
+    };
+  },
+  methods: {
+    toggleMenu() {
+      // alert("hello")
+      this.isMenuOpen = !this.isMenuOpen;
+      console.log(this.isMenuOpen);
+    },
+
+  },
   }
   </script>
 
@@ -407,7 +420,7 @@
       text-align: center;
     }
   
-    .header-area .container2{
+    .header-area .container{
       padding: 0px;
     }
   
